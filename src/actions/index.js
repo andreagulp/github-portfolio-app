@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_ISSUES, GET_PROJECT_ID, GET_SINGLE_PROJECT } from "./types";
+import { FETCH_ISSUES, GET_PROJECT_ID } from "./types";
 import { REPOS } from "../data/repos";
 
 const gitToken = process.env.REACT_APP_GIT_ACCESS_TOKEN;
@@ -27,13 +27,6 @@ export const fetchIssues = () => {
 export const getProjectId = projectId => {
   return {
     type: GET_PROJECT_ID,
-    payload: projectId
-  };
-};
-
-export const getSingleProject = projectId => {
-  return {
-    type: GET_SINGLE_PROJECT,
     payload: projectId
   };
 };

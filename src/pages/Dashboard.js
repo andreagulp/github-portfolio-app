@@ -25,14 +25,14 @@ class Dashboard extends Component {
     console.log(process.env.NODE_ENV);
     return (
       <div className={classes.root}>
-        {/* <ProjectsList projects={projects} /> */}
+        <ProjectsList projects={projects} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  // return { projects: getProjects(state) };
+  return { projects: getProjects(state) };
 };
 
 // export default connect(

@@ -2,23 +2,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { getProjects } from "../selectors/projectsSelector";
-// import { getSingleProjects } from "../selectors/projectsSelector";
+import { getSingleProject } from "../selectors/projectsSelector";
 
 class ProjectDetail extends Component {
   componentDidMount = () => {
-    // this.props.getProjectId(this.props.match.params.projectid);
-    this.props.getSingleProject(this.props.match.params.projectid);
+    this.props.getProjectId(this.props.match.params.projectid);
   };
 
   render() {
-    console.log("this.props.project", this.props.project);
-    const { projectId, project } = this.props;
+    const { project } = this.props;
+    console.log("project", project);
+
     return (
       <div>
         <h4>ProjectDetail Component Working</h4>
         {this.props.match.params.projectid}
         <div>
-          <h1>{projectId}</h1>
+          <h1>{this.props.match.params.projectid}</h1>
         </div>
       </div>
     );
@@ -27,8 +27,7 @@ class ProjectDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    projectId: state.projectId,
-    project: getProjects(state)
+    project: getSingleProject(state)
   };
 };
 

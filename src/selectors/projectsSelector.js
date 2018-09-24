@@ -16,7 +16,7 @@ export const getProjects = createSelector([getIssues], issues => {
     projects = [
       ...projects,
       {
-        id: issue.id,
+        id: issue.id.toString(),
         repository_url: issue.repository_url,
         state: issue.state,
         title: issue.title,
@@ -65,9 +65,7 @@ export const getProjects = createSelector([getIssues], issues => {
   return projects;
 });
 
-// export const getSingleProjects = createSelector(
-//   [getProjects, getProjectId],
-//   (projects, projectId) => {
-//     return projects.filter(project => project.id === projectId);
-//   }
-// );
+export const getSingleProject = createSelector(
+  [getProjects, getProjectId],
+  (projects, projectId) => projects.filter(project => project.id === projectId)
+);
