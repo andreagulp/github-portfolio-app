@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Grid from "@material-ui/core/Grid";
+
 import * as actions from "../actions";
-import { getProjects } from "../selectors/projectsSelector";
 import { getSingleProject } from "../selectors/projectsSelector";
+import Sprints from "../components/Sprints";
+import ProjectInfo from "../components/ProjectInfo";
 
 class ProjectDetail extends Component {
   componentDidMount = () => {
@@ -14,13 +17,14 @@ class ProjectDetail extends Component {
     console.log("project", project);
 
     return (
-      <div>
-        <h4>ProjectDetail Component Working</h4>
-        {this.props.match.params.projectid}
-        <div>
-          <h1>{this.props.match.params.projectid}</h1>
-        </div>
-      </div>
+      <Grid container spacing={24}>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Sprints project={project} />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <ProjectInfo />
+        </Grid>
+      </Grid>
     );
   }
 }
