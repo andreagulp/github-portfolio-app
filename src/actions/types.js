@@ -1,0 +1,3 @@
+export const FETCH_ISSUES = "FETCH_ISSUES";
+export const GET_PROJECT_ID = "GET_PROJECT_ID";
+export const GET_SINGLE_PROJECT = "GET_SINGLE_PROJECT";
