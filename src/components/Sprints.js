@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
+import SprintCard from "./SprintCard";
 
 class Sprints extends Component {
   render() {
@@ -8,14 +9,13 @@ class Sprints extends Component {
     }
     const project = this.props.project[0];
 
-    console.log("project from Sprints", project);
     return (
       <Grid container spacing={24}>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <p>{project.currentSprint}</p>
+          <SprintCard title="Current Sprint" sprint={project.currentSprint} />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <p>{project.nextStep}</p>
+          <SprintCard title="Next Sprint" sprint={project.nextStep} />
         </Grid>
       </Grid>
     );

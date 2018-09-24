@@ -11,6 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import FilterList from "@material-ui/icons/FilterList";
 
 import Navigation from "./Navigation";
+import FiltersPannel from "./FiltersPannel";
 
 const styles = theme => ({
   root: {
@@ -24,10 +25,10 @@ const styles = theme => ({
     marginRight: 20
   },
   title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
-    }
+    // display: "none",
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "block"
+    // }
   },
   search: {
     position: "relative",
@@ -74,11 +75,24 @@ const styles = theme => ({
 
 class Header extends Component {
   state = {
-    navOpen: false
+    navOpen: false,
+    filtersOpen: false
   };
 
   toggleNav = () => {
     this.setState({ navOpen: !this.state.navOpen });
+  };
+  toggleFilters = () => {
+    this.setState({ filtersOpen: !this.state.filtersOpen });
+  };
+
+  renderPageTitle = () => {
+    switch (window.location.pathname) {
+      case "/":
+        return "Kaizen Portfolio";
+      default:
+        return "Project Details";
+    }
   };
 
   render() {
@@ -101,31 +115,46 @@ class Header extends Component {
               color="inherit"
               noWrap
             >
-              Kaizen Portfolio
+              {this.renderPageTitle()}
             </Typography>
+
             <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+
+            {window.location.pathname === "/" ? (
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <Input
+                  placeholder="Search…"
+                  disableUnderline
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                />
               </div>
-              <Input
-                placeholder="Search…"
-                disableUnderline
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div>
-            <div>
-              <IconButton color="inherit">
-                <FilterList />
-              </IconButton>
-            </div>
+            ) : (
+              <div />
+            )}
+
+            {window.location.pathname === "/" ? (
+              <div>
+                <IconButton color="inherit" onClick={this.toggleFilters}>
+                  <FilterList />
+                </IconButton>
+              </div>
+            ) : (
+              <div />
+            )}
           </Toolbar>
         </AppBar>
 
         <Navigation navOpen={this.state.navOpen} toggleNav={this.toggleNav} />
+        <FiltersPannel
+          filtersOpen={this.state.filtersOpen}
+          toggleFilters={this.toggleFilters}
+        />
       </div>
     );
   }

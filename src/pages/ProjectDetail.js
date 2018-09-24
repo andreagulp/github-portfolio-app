@@ -9,6 +9,7 @@ import ProjectInfo from "../components/ProjectInfo";
 
 class ProjectDetail extends Component {
   componentDidMount = () => {
+    this.props.fetchIssues();
     this.props.getProjectId(this.props.match.params.projectid);
   };
 
@@ -18,11 +19,11 @@ class ProjectDetail extends Component {
 
     return (
       <Grid container spacing={24}>
-        <Grid item xs={12} sm={6} md={6} lg={6}>
+        <Grid item xs={12} sm={8} md={8} lg={8}>
           <Sprints project={project} />
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={6}>
-          <ProjectInfo />
+        <Grid item xs={12} sm={4} md={4} lg={4}>
+          <ProjectInfo project={project} />
         </Grid>
       </Grid>
     );

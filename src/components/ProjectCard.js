@@ -10,10 +10,11 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import LabelList from "./LabelList";
 import { Link } from "react-router-dom";
 
+import { getSquadAvatar } from "../utils";
 import { REPOS } from "../data/repos";
+import LabelList from "./LabelList";
 
 const styles = theme => ({
   card: {
@@ -22,6 +23,7 @@ const styles = theme => ({
   },
   header: {
     minHeight: 100
+    // width: "100%"
   },
   content: {
     minHeight: 100
@@ -46,43 +48,30 @@ const styles = theme => ({
   },
   expandOpen: {
     transform: "rotate(180deg)"
+  },
+  actionArea: {
+    width: "100%"
   }
 });
 
 class ProjectCard extends Component {
-  getAvatar = () => {
-    const { repository_url } = this.props.project;
-
-    const orgName = repository_url.substring(
-      repository_url.lastIndexOf("repos/") + 6,
-      repository_url.lastIndexOf("/")
-    );
-
-    const repoName = repository_url.substring(
-      repository_url.lastIndexOf(`${orgName}/`) + orgName.length + 1
-    );
-
-    return REPOS.find(x => {
-      return x.repo === repoName;
-    });
-  };
-
   render() {
     const { classes, project } = this.props;
+    const getSquadName = getSquadAvatar(project.repository_url, REPOS);
     return (
       <Card className={classes.card}>
         <Link to={`/${project.id}`} style={{ textDecoration: "none" }}>
-          <CardActionArea>
+          <CardActionArea className={classes.actionArea}>
             <CardHeader
               avatar={
                 <Avatar
                   aria-label="Recipe"
                   style={{
-                    backgroundColor: this.getAvatar().color,
+                    backgroundColor: getSquadName.color,
                     fontSize: 12
                   }}
                 >
-                  {this.getAvatar().squad}
+                  {getSquadName.squad}
                 </Avatar>
               }
               title={project.title}
