@@ -2,6 +2,7 @@ import { createSelector } from "reselect";
 
 const getIssues = state => state.issues;
 const getProjectId = state => state.projectId;
+const getKeyword = state => state.keyword;
 
 const extractText = (textBody, start, end) => {
   return textBody.substring(
@@ -68,4 +69,18 @@ export const getProjects = createSelector([getIssues], issues => {
 export const getSingleProject = createSelector(
   [getProjects, getProjectId],
   (projects, projectId) => projects.filter(project => project.id === projectId)
+);
+
+export const getVisibleProjects = createSelector(
+  [getProjects, getKeyword],
+  (projects, keyword) => {
+    console.log(keyword);
+    if (keyword && keyword.length > 0) {
+      return projects.filter(project =>
+        project.title.toUpperCase().includes(keyword.toUpperCase())
+      );
+    } else {
+      return projects;
+    }
+  }
 );

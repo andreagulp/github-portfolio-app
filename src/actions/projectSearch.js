@@ -1,8 +1,8 @@
-import { SEARCH_PROJECT } from "./types";
+import { GET_SEARCH_KEYWORD } from "./types";
 
-export const searchFlavor = keyword => {
+export const getSearchKeyword = keyword => {
   return {
-    type: SEARCH_PROJECT,
+    type: GET_SEARCH_KEYWORD,
     payload: keyword
   };
 };
