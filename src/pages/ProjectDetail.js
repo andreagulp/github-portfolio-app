@@ -15,7 +15,7 @@ class ProjectDetail extends Component {
 
   render() {
     const { project } = this.props;
-    console.log("project", project);
+    console.log("PrpojectDetail props", this.props);
 
     return (
       <Grid container spacing={24}>

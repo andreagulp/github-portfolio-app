@@ -4,7 +4,7 @@ import { REPOS } from "../data/repos";
 
 const gitToken = process.env.REACT_APP_GIT_ACCESS_TOKEN;
 const baseGitUrl = "https://github.ibm.com/api/v3/search/issues?q=";
-const gitSeachKeyword = "%20label:enhancement";
+const gitSeachKeyword = "%20label:PUBLISH";
 
 const gitFullUrl = (gitOrgUrl, gitRepoUrl) =>
   `${baseGitUrl}${gitSeachKeyword}%20repo:${gitOrgUrl}/${gitRepoUrl}&access_token=${gitToken}`;

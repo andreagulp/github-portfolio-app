@@ -5,6 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Divider from "@material-ui/core/Divider";
 
+import SortSelection from "./SortSelection";
+
 const styles = theme => ({
   drawerHeader: {
     display: "flex",
@@ -45,7 +47,7 @@ class FiltersPannel extends Component {
           //   onClick={toggleFilters}
           //   onKeyDown={toggleFilters}
         >
-          Filter and Sort Filter and Sort Filter and Sort
+          <SortSelection />
         </div>
       </Drawer>
     );

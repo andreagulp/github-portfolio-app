@@ -1,8 +1,10 @@
 import { createSelector } from "reselect";
+import _ from "lodash";
 
 const getIssues = state => state.issues;
 const getProjectId = state => state.projectId;
 const getKeyword = state => state.keyword;
+const getSortValue = state => state.sortValue;
 
 const extractText = (textBody, start, end) => {
   return textBody.substring(
@@ -18,7 +20,11 @@ export const getProjects = createSelector([getIssues], issues => {
       ...projects,
       {
         id: issue.id.toString(),
+        topProject: issue.labels.find(label => label.name === "TOP")
+          ? true
+          : false,
         repository_url: issue.repository_url,
+        issue_url: issue.html_url,
         state: issue.state,
         title: issue.title,
         description: extractText(
@@ -74,7 +80,6 @@ export const getSingleProject = createSelector(
 export const getVisibleProjects = createSelector(
   [getProjects, getKeyword],
   (projects, keyword) => {
-    console.log(keyword);
     if (keyword && keyword.length > 0) {
       return projects.filter(project =>
         project.title.toUpperCase().includes(keyword.toUpperCase())
@@ -82,5 +87,14 @@ export const getVisibleProjects = createSelector(
     } else {
       return projects;
     }
+  }
+);
+
+export const getSortedProject = createSelector(
+  [getVisibleProjects, getSortValue],
+  (visibleProjects, sortValue) => {
+    return !sortValue.direction
+      ? _.orderBy(visibleProjects, sortValue.field, ["asc"])
+      : _.orderBy(visibleProjects, sortValue.field, ["desc"]);
   }
 );

@@ -63,3 +63,39 @@ Continue Hypercare support full August ME Closing and September
 3Q18 closing final of Hypercare
 
 "
+
+https://github.ibm.com/RICCETTI/kaizen-portfolio-app.git
+926c435de402f6c974347874de702d4c4a06ee2f
+riccetti@sk.ibm.com
+
+aim: Cost per Trx
+aim: Customer sat
+aim: Cycle time
+aim: Employee sat
+aim: Throughput
+aim: Total Cost
+bug
+Duplication
+Epic
+market: EMEA
+market: BeNeLux
+market: CEE
+market: DACH
+market: Europe
+market: France
+market: Global
+market: Italy
+market: MEA
+market: Nordics
+market: SPGI
+market: UKI
+Prio
+question
+scope: O2C
+scope: O2O
+way: Automation
+way: Education
+way: Engage Support
+way: Process
+way: Tools
+way: Work Movement

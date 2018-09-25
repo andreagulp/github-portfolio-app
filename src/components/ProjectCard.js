@@ -6,15 +6,12 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
 import { getSquadAvatar } from "../utils";
 import { REPOS } from "../data/repos";
-import LabelList from "./LabelList";
+import ProjectIconsIndicator from "./ProjectIconsIndicator";
 
 const styles = theme => ({
   card: {
@@ -26,7 +23,7 @@ const styles = theme => ({
     // width: "100%"
   },
   content: {
-    minHeight: 100
+    // minHeight: 100
     // maxHeight: 100
   },
   media: {
@@ -80,22 +77,17 @@ class ProjectCard extends Component {
             />
           </CardActionArea>
         </Link>
+
         <CardContent className={classes.content}>
-          <LabelList labels={project.labels} />
+          <Typography noWrap={true} component="p">
+            {project.description}
+          </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton>
-            <i className="fab fa-github" />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
+          <ProjectIconsIndicator
+            savings={project.savings}
+            topProject={project.topProject}
+          />
         </CardActions>
       </Card>
     );

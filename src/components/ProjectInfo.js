@@ -10,14 +10,16 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import red from "@material-ui/core/colors/red";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Divider from "@material-ui/core/Divider";
-import LabelList from "./LabelList";
-import { REPOS } from "../data/repos";
+import ReactMarkdown from "react-markdown";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import { getSquadAvatar } from "../utils";
+import { REPOS } from "../data/repos";
+import LabelList from "./LabelList";
+import GithubButtonLink from "./GithubButtonLink";
+import ShareButton from "./ShareButton";
 
 const styles = theme => ({
   card: {
@@ -61,30 +63,31 @@ class ProjectInfo extends Component {
   };
 
   render() {
+    console.log("ProjectInfo props", this.props);
     if (!this.props.project[0]) {
       return <div>...loading</div>;
     }
     const project = this.props.project[0];
     const { classes } = this.props;
-    console.log("project from Sprints", project);
     const getSquadName = getSquadAvatar(project.repository_url, REPOS);
-    console.log("squadName", getSquadName);
     return (
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar
-              alt={project.assignee.name}
-              src={project.assignee.avatar}
-              aria-label="Recipe"
-              className={classes.avatar}
-            />
+            <Tooltip title={project.assignee.name} placement="top">
+              <Avatar
+                alt={project.assignee.name}
+                src={project.assignee.avatar}
+                aria-label="Recipe"
+                className={classes.avatar}
+              />
+            </Tooltip>
           }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+          // action={
+          //   <IconButton>
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
           title={project.title}
           subheader={project.state}
         />
@@ -101,48 +104,46 @@ class ProjectInfo extends Component {
           </Typography>
 
           <Divider className={classes.divider} />
-          <Typography component="p">
+          <Typography component="span">
             <b>Project Description: </b>
-            {`${project.description}`}
+            <ReactMarkdown source={project.description} />
           </Typography>
 
           <Divider className={classes.divider} />
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
+          <GithubButtonLink url={project.issue_url} />
+          <ShareButton />
+          <Tooltip title="Expand to See Details" placement="top">
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </Tooltip>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography component="p">
+            <Typography component="span">
               <b>Project Benefits: </b>
-              {`${project.benefits}`}
+              <ReactMarkdown source={project.benefits} />
             </Typography>
 
             <Divider className={classes.divider} />
-            <Typography component="p">
+            <Typography component="span">
               <b>Project Goal: </b>
-              {`${project.goal}`}
+              <ReactMarkdown source={project.goal} />
             </Typography>
 
             <Divider className={classes.divider} />
-            <Typography component="p">
+            <Typography component="span">
               <b>Project Due Date: </b>
-              {`${project.dueDate}`}
+              <ReactMarkdown source={project.dueDate} />
             </Typography>
 
             <Divider className={classes.divider} />

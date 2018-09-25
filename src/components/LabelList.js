@@ -23,8 +23,9 @@ class LabelList extends Component {
             <Chip
               className={classes.chip}
               label={label.name}
-              variant="outlined"
               key={label.id}
+              color="primary"
+              variant="outlined"
             />
           );
         })}
