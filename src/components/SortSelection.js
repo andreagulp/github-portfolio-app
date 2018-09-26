@@ -56,7 +56,7 @@ class SortSelection extends Component {
             onChange={this.handleSortFieldChange}
           >
             <FormControlLabel
-              value="title"
+              value="titleSort"
               control={<Radio color="primary" />}
               label="By Name"
             />

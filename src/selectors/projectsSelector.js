@@ -27,6 +27,7 @@ export const getProjects = createSelector([getIssues], issues => {
         issue_url: issue.html_url,
         state: issue.state,
         title: issue.title,
+        titleSort: issue.title.toLowerCase(),
         description: extractText(
           issue.body,
           "**Project definition:**",

@@ -1,3 +1,16 @@
+https://github.ibm.com/RICCETTI/kaizen-portfolio-app.git
+926c435de402f6c974347874de702d4c4a06ee2f
+riccetti@sk.ibm.com
+
+sort
+By Name
+By Savings
+
+Filter
+State: [open, closed] ? Show Closed -SWITCH-
+Top Project Only: [true, false] -SWITCH-
+labels: button or tag that can be clicked, the click shoudl stay
+
 **Project Name:**
 issue.title
 
@@ -63,10 +76,6 @@ Continue Hypercare support full August ME Closing and September
 3Q18 closing final of Hypercare
 
 "
-
-https://github.ibm.com/RICCETTI/kaizen-portfolio-app.git
-926c435de402f6c974347874de702d4c4a06ee2f
-riccetti@sk.ibm.com
 
 aim: Cost per Trx
 aim: Customer sat

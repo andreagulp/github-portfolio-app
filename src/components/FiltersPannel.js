@@ -19,6 +19,9 @@ const styles = theme => ({
   },
   filterContainer: {
     padding: 5
+  },
+  filterDivider: {
+    marginTop: 20
   }
 });
 
@@ -55,6 +58,7 @@ class FiltersPannel extends Component {
           >
             <SortSelection />
           </div>
+          <Divider className={classes.filterDivider} />
           <div
             tabIndex={1}
             role="button"
