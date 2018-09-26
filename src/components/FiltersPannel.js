@@ -6,6 +6,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Divider from "@material-ui/core/Divider";
 
 import SortSelection from "./SortSelection";
+import FilterSelection from "./FilterSelection";
 
 const styles = theme => ({
   drawerHeader: {
@@ -14,6 +15,10 @@ const styles = theme => ({
     justifyContent: "flex-end",
     padding: "0 8px",
     ...theme.mixins.toolbar
+    // minWidth: 300
+  },
+  filterContainer: {
+    padding: 5
   }
 });
 
@@ -35,19 +40,29 @@ class FiltersPannel extends Component {
         open={filtersOpen}
         onClose={toggleFilters}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={toggleFilters}>
-            <ChevronRightIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <div
-          tabIndex={0}
-          role="button"
-          //   onClick={toggleFilters}
-          //   onKeyDown={toggleFilters}
-        >
-          <SortSelection />
+        <div className={classes.filterContainer}>
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={toggleFilters}>
+              <ChevronRightIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <div
+            tabIndex={0}
+            role="button"
+            //   onClick={toggleFilters}
+            //   onKeyDown={toggleFilters}
+          >
+            <SortSelection />
+          </div>
+          <div
+            tabIndex={1}
+            role="button"
+            //   onClick={toggleFilters}
+            //   onKeyDown={toggleFilters}
+          >
+            <FilterSelection />
+          </div>
         </div>
       </Drawer>
     );
