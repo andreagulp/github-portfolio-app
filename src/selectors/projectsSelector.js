@@ -5,6 +5,8 @@ const getIssues = state => state.issues;
 const getProjectId = state => state.projectId;
 const getKeyword = state => state.keyword;
 const getSortValue = state => state.sortValue;
+const getIsClosed = state => state.filters.isClosed;
+const getIsTop = state => state.filters.isTop;
 
 const extractText = (textBody, start, end) => {
   return textBody.substring(
@@ -91,11 +93,33 @@ export const getVisibleProjects = createSelector(
   }
 );
 
-export const getSortedProject = createSelector(
+export const getSortedProjects = createSelector(
   [getVisibleProjects, getSortValue],
   (visibleProjects, sortValue) => {
     return !sortValue.direction
       ? _.orderBy(visibleProjects, sortValue.field, ["asc"])
       : _.orderBy(visibleProjects, sortValue.field, ["desc"]);
+  }
+);
+
+export const getClosedProjects = createSelector(
+  [getSortedProjects, getIsClosed],
+  (sortedProjects, isClosed) => {
+    if (isClosed) {
+      return sortedProjects.filter(project => project.state === "closed");
+    } else {
+      return sortedProjects.filter(project => project.state === "open");
+    }
+  }
+);
+
+export const getTopProjects = createSelector(
+  [getClosedProjects, getIsTop],
+  (closedProjects, isTop) => {
+    if (isTop) {
+      return closedProjects.filter(project => project.topProject === true);
+    } else {
+      return closedProjects;
+    }
   }
 );

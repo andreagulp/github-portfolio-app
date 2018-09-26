@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { compose } from "redux";
 
 import * as actions from "../actions";
-import { getSortedProject } from "../selectors/projectsSelector";
+import { getTopProjects } from "../selectors/projectsSelector";
 import ProjectsList from "../components/ProjectsList";
 
 const styles = () => ({
@@ -32,7 +32,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  return { projects: getSortedProject(state) };
+  return { projects: getTopProjects(state) };
 };
 
 export default compose(

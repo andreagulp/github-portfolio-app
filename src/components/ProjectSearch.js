@@ -6,7 +6,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-import * as actions from "../actions/projectSearch";
+import * as actions from "../actions/search";
 
 const styles = theme => ({
   search: {

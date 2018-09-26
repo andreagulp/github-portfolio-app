@@ -2,27 +2,29 @@ import React, { Component } from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { connect } from "react-redux";
+
+import * as actions from "../actions/filter";
 
 class FilterSelection extends Component {
-  state = {
-    checkedA: false,
-    checkedB: false
+  handleIsClosedChange = name => event => {
+    this.props.getFilterIsClosed(event.target.checked);
   };
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+  handleIsTopChange = name => event => {
+    this.props.getFilterIsTop(event.target.checked);
   };
 
   render() {
+    const { filters } = this.props;
     return (
       <div>
         <FormGroup row>
           <FormControlLabel
             control={
               <Switch
-                checked={this.state.checkedA}
-                onChange={this.handleChange("checkedA")}
-                value="checkedA"
+                checked={filters.isClosed}
+                onChange={this.handleIsClosedChange("isClosed")}
+                value="isClosed"
               />
             }
             label="Show Closed Project"
@@ -32,9 +34,9 @@ class FilterSelection extends Component {
           <FormControlLabel
             control={
               <Switch
-                checked={this.state.checkedB}
-                onChange={this.handleChange("checkedB")}
-                value="checkedB"
+                checked={filters.isTop}
+                onChange={this.handleIsTopChange("isTop")}
+                value="isTop"
               />
             }
             label="Filter Top Project"
@@ -45,4 +47,11 @@ class FilterSelection extends Component {
   }
 }
 
-export default FilterSelection;
+const mapStateToProps = state => {
+  return { filters: state.filters };
+};
+
+export default connect(
+  mapStateToProps,
+  actions
+)(FilterSelection);
