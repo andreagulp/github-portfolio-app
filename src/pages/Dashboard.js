@@ -4,7 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 import { compose } from "redux";
 
 import * as actions from "../actions";
-import { getTopProjects } from "../selectors/projectsSelector";
+import {
+  getTopProjects,
+  getLabelFilterProjects
+} from "../selectors/projectsSelector";
 import ProjectsList from "../components/ProjectsList";
 
 const styles = () => ({
@@ -21,7 +24,7 @@ class Dashboard extends Component {
 
   render() {
     const { projects, classes } = this.props;
-    console.log(this.props.projects);
+    console.log("Dashboard", this.props.projects);
     // console.log(process.env.NODE_ENV);
     return (
       <div className={classes.root}>
@@ -32,7 +35,10 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  return { projects: getTopProjects(state) };
+  return {
+    // projects: getLabelFilterProjects(state)
+    projects: getTopProjects(state)
+  };
 };
 
 export default compose(

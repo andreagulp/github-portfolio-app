@@ -7,6 +7,7 @@ import Divider from "@material-ui/core/Divider";
 
 import SortSelection from "./SortSelection";
 import FilterSelection from "./FilterSelection";
+import FilterLabels from "./FilterLabels";
 
 const styles = theme => ({
   drawerHeader: {
@@ -67,6 +68,8 @@ class FiltersPannel extends Component {
           >
             <FilterSelection />
           </div>
+          <Divider className={classes.filterDivider} />
+          <FilterLabels />
         </div>
       </Drawer>
     );

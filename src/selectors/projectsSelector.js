@@ -123,3 +123,29 @@ export const getTopProjects = createSelector(
     }
   }
 );
+
+export const getLabels = createSelector([getTopProjects], topProjects => {
+  let labels = [];
+  topProjects.map(project =>
+    project.labels.map(label => {
+      return (labels = _.union([...labels, label.name]));
+    })
+  );
+  return labels;
+});
+
+// export const getLabelFilterProjects = createSelector(
+//   [getTopProjects, getLabels],
+//   (topProjects, labels) => {
+//     let labelFilterProjects = "";
+//     return labels.map(label => {
+//       return topProjects.map(project => {
+//         return project.labels.map(pjLabel => {
+//           //asas
+//         });
+//       });
+//     });
+//     // do something
+//     console.log("projectsSelectors labelFilterProjects", labelFilterProjects);
+//   }
+// );
