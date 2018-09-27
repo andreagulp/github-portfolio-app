@@ -19,6 +19,27 @@ export const REPOS = [
     repo: "ES-Prioritization",
     squad: "PBS",
     color: "#0e8a16"
+  },
+  {
+    repoId: "00000",
+    org: "kaizen-test",
+    repo: "sw-wow",
+    squad: "SW",
+    color: "#008672"
+  },
+  {
+    repoId: "00000",
+    org: "kaizen-test",
+    repo: "tss-wow",
+    squad: "TSS",
+    color: "#d37d4c"
+  },
+  {
+    repoId: "00000",
+    org: "kaizen-test",
+    repo: "cmpa-wow",
+    squad: "CMPA",
+    color: "#f78fc6"
   }
 ];
 

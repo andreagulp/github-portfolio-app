@@ -33,7 +33,6 @@ const styles = theme => ({
 
 class SortSelection extends Component {
   handleSortFieldChange = event => {
-    console.log(event.target.value);
     this.props.getSortField(event.target.value);
   };
 
@@ -43,7 +42,6 @@ class SortSelection extends Component {
 
   render() {
     const { classes, sortValue } = this.props;
-    console.log("sortValue", sortValue);
     return (
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>

@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 import * as actions from "../actions/filter";
-import { getLabels } from "../selectors/projectsSelector";
+import { getSquadLabels } from "../selectors/projectsSelector";
 
 const styles = theme => ({
   root: {
@@ -47,9 +47,9 @@ const MenuProps = {
   }
 };
 
-class FilterLabels extends Component {
+class FilterSquad extends Component {
   handleChange = event => {
-    this.props.getFilterLabels(event.target.value);
+    this.props.getFilterSquad(event.target.value);
   };
 
   render() {
@@ -58,12 +58,12 @@ class FilterLabels extends Component {
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-multiple-chip">
-            Filter by Labels
+            Filter by Squad
           </InputLabel>
           <Select
             className={classes.select}
             multiple
-            value={filters.labels}
+            value={filters.squads}
             onChange={this.handleChange}
             input={<Input id="select-multiple-chip" />}
             renderValue={selected => (
@@ -77,7 +77,7 @@ class FilterLabels extends Component {
           >
             {labels.map(label => (
               <MenuItem key={label} value={label}>
-                <Checkbox checked={filters.labels.indexOf(label) > -1} />
+                <Checkbox checked={filters.squads.indexOf(label) > -1} />
                 <ListItemText primary={label} />
               </MenuItem>
             ))}
@@ -91,7 +91,7 @@ class FilterLabels extends Component {
 const mapStateToProps = state => {
   return {
     filters: state.filters,
-    labels: getLabels(state)
+    labels: getSquadLabels(state)
   };
 };
 
@@ -101,4 +101,4 @@ export default compose(
     mapStateToProps,
     actions
   )
-)(FilterLabels);
+)(FilterSquad);

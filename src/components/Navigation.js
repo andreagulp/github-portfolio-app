@@ -41,19 +41,6 @@ class Navigation extends Component {
               </ListItem>
             </Link>
 
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <ListItem
-                button
-                selected={this.state.selectedIndex === 0}
-                onClick={event => this.handleListItemClick(event, 0)}
-              >
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="2 Page" />
-              </ListItem>
-            </Link>
-
             <Link to="/testpage" style={{ textDecoration: "none" }}>
               <ListItem
                 button

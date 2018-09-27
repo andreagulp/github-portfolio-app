@@ -83,28 +83,26 @@ aim: Cycle time
 aim: Employee sat
 aim: Throughput
 aim: Total Cost
-bug
-Duplication
-Epic
+
+market: Global
 market: EMEA
+market: MEA
 market: BeNeLux
 market: CEE
 market: DACH
 market: Europe
 market: France
-market: Global
 market: Italy
-market: MEA
 market: Nordics
 market: SPGI
 market: UKI
-Prio
-question
+
 scope: O2C
 scope: O2O
 way: Automation
 way: Education
-way: Engage Support
 way: Process
-way: Tools
 way: Work Movement
+
+PUBLISH
+TOP

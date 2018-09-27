@@ -63,7 +63,6 @@ class ProjectInfo extends Component {
   };
 
   render() {
-    console.log("ProjectInfo props", this.props);
     if (!this.props.project[0]) {
       return <div>...loading</div>;
     }

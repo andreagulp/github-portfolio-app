@@ -1,5 +1,7 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
+import { getSquadAvatar } from "../utils";
+import { REPOS } from "../data/repos";
 
 const getIssues = state => state.issues;
 const getProjectId = state => state.projectId;
@@ -7,6 +9,8 @@ const getKeyword = state => state.keyword;
 const getSortValue = state => state.sortValue;
 const getIsClosed = state => state.filters.isClosed;
 const getIsTop = state => state.filters.isTop;
+const getSelectedLabels = state => state.filters.labels;
+const getSelectedSquads = state => state.filters.squads;
 
 const extractText = (textBody, start, end) => {
   return textBody.substring(
@@ -22,6 +26,7 @@ export const getProjects = createSelector([getIssues], issues => {
       ...projects,
       {
         id: issue.id.toString(),
+        squad: getSquadAvatar(issue.repository_url, REPOS).squad,
         topProject: issue.labels.find(label => label.name === "TOP")
           ? true
           : false,
@@ -131,21 +136,50 @@ export const getLabels = createSelector([getTopProjects], topProjects => {
       return (labels = _.union([...labels, label.name]));
     })
   );
-  return labels;
+  return labels.sort();
 });
 
-// export const getLabelFilterProjects = createSelector(
-//   [getTopProjects, getLabels],
-//   (topProjects, labels) => {
-//     let labelFilterProjects = "";
-//     return labels.map(label => {
-//       return topProjects.map(project => {
-//         return project.labels.map(pjLabel => {
-//           //asas
-//         });
-//       });
-//     });
-//     // do something
-//     console.log("projectsSelectors labelFilterProjects", labelFilterProjects);
-//   }
-// );
+export const getLabelFilterProjects = createSelector(
+  [getTopProjects, getSelectedLabels],
+  (topProjects, selectedLabels) => {
+    let labelFilterProjects = selectedLabels.map(label => {
+      return selectedLabels.length > 0
+        ? _.filter(topProjects, { labels: [{ name: label }] })
+        : topProjects;
+    });
+    if (selectedLabels.length > 0) {
+      labelFilterProjects = [].concat.apply([], labelFilterProjects);
+      return _.union(labelFilterProjects);
+    } else {
+      return topProjects;
+    }
+  }
+);
+
+export const getSquadLabels = createSelector(
+  [getLabelFilterProjects],
+  labelFilterProjects => {
+    let squadLabels = [];
+    labelFilterProjects.map(project => {
+      return (squadLabels = _.union([...squadLabels, project.squad]));
+    });
+    return squadLabels.sort();
+  }
+);
+
+export const getSquadFilterProjects = createSelector(
+  [getLabelFilterProjects, getSelectedSquads],
+  (labelFilterProjects, selectedSquads) => {
+    let squadFilterProjects = selectedSquads.map(label => {
+      return selectedSquads.length > 0
+        ? _.filter(labelFilterProjects, { squad: label })
+        : labelFilterProjects;
+    });
+    if (selectedSquads.length > 0) {
+      squadFilterProjects = [].concat.apply([], squadFilterProjects);
+      return _.union(squadFilterProjects);
+    } else {
+      return labelFilterProjects;
+    }
+  }
+);
