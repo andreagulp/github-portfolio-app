@@ -5,6 +5,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/Inbox";
+import BarChart from "@material-ui/icons/BarChart";
+import Home from "@material-ui/icons/Home";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import { Link } from "react-router-dom";
 
@@ -35,9 +37,22 @@ class Navigation extends Component {
                 onClick={event => this.handleListItemClick(event, 0)}
               >
                 <ListItemIcon>
-                  <InboxIcon />
+                  <Home />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Portfolio" />
+              </ListItem>
+            </Link>
+
+            <Link to="/metrics" style={{ textDecoration: "none" }}>
+              <ListItem
+                button
+                selected={this.state.selectedIndex === 0}
+                onClick={event => this.handleListItemClick(event, 0)}
+              >
+                <ListItemIcon>
+                  <BarChart />
+                </ListItemIcon>
+                <ListItemText primary="Metrics" />
               </ListItem>
             </Link>
 

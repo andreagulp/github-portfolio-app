@@ -44,9 +44,9 @@ const styles = theme => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: 100,
+      width: 200,
       "&:focus": {
-        width: 200
+        width: 300
       }
     }
   }
@@ -65,7 +65,7 @@ class ProjectSearch extends Component {
           <SearchIcon />
         </div>
         <Input
-          placeholder="Search Title…"
+          placeholder="Search Project Name..."
           disableUnderline
           classes={{
             root: classes.inputRoot,
